@@ -2,11 +2,18 @@
 Created by Samuel Reichert
 
 ## Setup
-This project was made using Node.js 12.16
+This project was made using Node.js 12.16.
+
+You must also have [Yarn](https://yarnpkg.com/) installed.
 
 First clone this project using:
 ```
 git clone git@github.com:samuelreichert/github-search.git
+```
+
+Then install the dependencies using Yarn.
+```
+yarn install
 ```
 
 ### `yarn start`
@@ -39,4 +46,13 @@ The project has the following tech stack:
 * Redux
 * Axios
 * React-Intl
-* Styled-Components
+* Emotion and Rebass
+
+## Decisions
+
+**UI and UX**
+I decided to use emotion so this way the components are completely modular, and rebass helps me with primitive UI components so I dont need to create everything from the ground.
+
+**Requests**
+I decided to use Axios to handle the requests asynchronously, and decided to centralize all the information about the APIs requests inside the /api path, this way I abstracted how the API works, and only call them in the components.
+
