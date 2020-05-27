@@ -1,25 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Box, Flex, Link } from 'rebass'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Box
+        color='white'
+        bg='black'
+      >
+        <Flex alignItems='center' sx={{
+          maxWidth: 1200,
+          mx: 'auto',
+          py: 3,
+          px: 2
+        }}>
+
+          <Link variant='nav' sx={{ p: 0, fontSize: 2 }} href='https://samuelreichert.github.io' target='_blank'>
+            Samuel Reichert's Test
+          </Link>
+          <Box mx='auto' />
+          <Link variant='nav' p={0} href='https://saltoks.com/team' target='_blank'>
+            SaltoKS
+          </Link>
+        </Flex>
+      </Box>
+
+      <Box sx={{
+        maxWidth: 1200,
+        mx: 'auto',
+        px: 2,
+      }}>
+        Contents
+    </Box>
+    </>
   );
 }
 
