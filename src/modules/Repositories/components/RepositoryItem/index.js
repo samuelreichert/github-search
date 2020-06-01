@@ -13,7 +13,7 @@ const buildReadableCount = (count) => {
   return `${(count / 1000).toFixed(1)}k`
 }
 
-const RepositoryItem = ({ item }) => {
+const RepositoryItem = ({ item, formatMessage }) => {
   const {
     description,
     forks,
@@ -29,24 +29,22 @@ const RepositoryItem = ({ item }) => {
     watchers
   } = item
 
-  console.log(item)
-
   return (
     <a href={url} className='list-group-item list-group-item-action flex-column align-items-start'>
-      <div className='d-flex w-100 justify-content-between'>
+      <div className='d-flex w-100 justify-content-between flex-column flex-sm-row'>
         <h5 className='mb-1'>
           {isPrivate && <span className='mr-3'><i className='fas fa-user-lock' /></span>}
           {fullName}
         </h5>
-        <small>Updated {buildReadableDate(updatedAt)}</small>
+        <small>{formatMessage({ id: 'updatedAt' }, { date: buildReadableDate(updatedAt) })}</small>
       </div>
       <p className='mb-1'>{description}</p>
       <small>
-        <span className='mr-3'><i className='far fa-star' /> {buildReadableCount(starsCount)}</span>
-        {language && <span className='mr-3'><i className='fas fa-code' /> {language}</span>}
-        <span className='mr-3'><i className='fas fa-exclamation-circle' /> {buildReadableCount(openIssues)}</span>
-        <span className='mr-3'><i className='far fa-eye' /> {buildReadableCount(watchers)}</span>
-        <span className='mr-3'><i className='fas fa-code-branch' /> {buildReadableCount(forks)}</span>
+        <span className='mr-3 d-inline-block'><i className='far fa-star' /> {buildReadableCount(starsCount)}</span>
+        {language && <span className='mr-3 d-inline-block'><i className='fas fa-code' /> {language}</span>}
+        <span className='mr-3 d-inline-block'><i className='fas fa-exclamation-circle' /> {buildReadableCount(openIssues)}</span>
+        <span className='mr-3 d-inline-block'><i className='far fa-eye' /> {buildReadableCount(watchers)}</span>
+        <span className='mr-3 d-inline-block'><i className='fas fa-code-branch' /> {buildReadableCount(forks)}</span>
 
       </small>
     </a>
@@ -54,7 +52,8 @@ const RepositoryItem = ({ item }) => {
 }
 
 RepositoryItem.propTypes = {
-  item: PropTypes.object.isRequired
+  item: PropTypes.object.isRequired,
+  formatMessage: PropTypes.func.isRequired
 }
 
 export default RepositoryItem
