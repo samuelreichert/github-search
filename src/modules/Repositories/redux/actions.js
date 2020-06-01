@@ -3,9 +3,10 @@ export const setLoading = (loading) => ({
   loading
 })
 
-export const updateRepositories = ({ items, totalCount, loading = false }) => ({
+export const updateRepositories = ({ items = [], totalCount = 0, loading = false, responseTime = 0 } = {}) => ({
   type: 'UPDATE_REPOSITORIES',
   items,
   totalCount,
-  loading
+  loading,
+  responseTime
 })

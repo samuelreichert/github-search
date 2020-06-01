@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-// import { compose } from 'redux'
-
+import { useIntl } from 'react-intl'
+import { useHistory } from 'react-router-dom'
 import useDebounce from '../useDebounce'
-import Search from '../components'
-import { searchRepositories } from '../../../api'
+import useQuery from '../../../common/useQuery'
+
 import { setLoading, updateRepositories } from '../../Repositories/redux/actions'
+import { searchRepositories } from '../../../api'
+import Search from '../components'
 
 const mapDispatchToProps = {
   setLoading,
@@ -15,23 +17,37 @@ const mapDispatchToProps = {
 
 const SearchContainer = ({ setLoading, updateRepositories }) => {
   const [searchText, setSearchText] = useState('')
-
   const debouncedSearchText = useDebounce(searchText, 500)
-  const searchRepositoriesAsync = async (searchText) => {
-    const { items, total_count: totalCount } = await searchRepositories({ search: searchText })
-    updateRepositories({ items, totalCount })
+  const { formatMessage } = useIntl()
+  const query = useQuery()
+  const history = useHistory()
+  const page = query.get('page')
+  const searchString = query.get('q')
+
+  const searchRepositoriesAsync = async (searchText, page = 1) => {
+    const startTime = (new Date()).getTime()
+    const { items, total_count: totalCount } = await searchRepositories({ search: searchText, page })
+    const endTime = (new Date()).getTime()
+
+    updateRepositories({ items, totalCount, responseTime: (endTime - startTime) })
   }
 
   useEffect(() => {
+    if (searchString && page && searchString !== searchText) {
+      setLoading(true)
+      searchRepositoriesAsync(searchString, page)
+    }
+
     if (debouncedSearchText) {
+      history.push(`/?q=${debouncedSearchText}&page=1`)
       setLoading(true)
       searchRepositoriesAsync(debouncedSearchText)
     } else {
-      updateRepositories({ items: [], totalCount: 0 })
+      updateRepositories()
     }
   }, [debouncedSearchText])
 
-  return <Search onChange={e => setSearchText(e.target.value)} />
+  return <Search onChange={e => setSearchText(e.target.value)} formatMessage={formatMessage} />
 }
 
 SearchContainer.propTypes = {

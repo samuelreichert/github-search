@@ -1,27 +1,45 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-// import { compose } from 'redux'
+import { useIntl } from 'react-intl'
+// import useQuery from '../../../common/useQuery'
+// import { postUserCode } from '../../../api'
 
 import Repositories from '../components'
 import Loading from '../components/Loading'
 
-const mapStateToProps = ({ repositories: { items, totalCount, loading } }) => ({
+const mapStateToProps = ({ repositories: { items, totalCount, loading, responseTime } }) => ({
   items,
   loading,
-  totalCount
+  totalCount,
+  responseTime
 })
 
-const RepositoriesContainer = ({ items, loading, totalCount }) => {
-  if (loading) return <Loading />
+const RepositoriesContainer = ({ items, loading, totalCount, responseTime }) => {
+  const { formatMessage } = useIntl()
+  // const query = useQuery()
 
-  return <Repositories items={items} totalCount={totalCount} />
+  // const sendUserCode = async (code) => {
+  //   const data = await postUserCode(code)
+  //   console.log(data)
+  // }
+
+  // useEffect(() => {
+  //   const code = query.get('code')
+
+  //   if (code) sendUserCode(code)
+  // })
+
+  if (loading) return <Loading formatMessage={formatMessage} />
+
+  return <Repositories items={items} totalCount={totalCount} formatMessage={formatMessage} responseTime={responseTime} />
 }
 
 RepositoriesContainer.propTypes = {
   items: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
-  totalCount: PropTypes.number.isRequired
+  totalCount: PropTypes.number.isRequired,
+  responseTime: PropTypes.number.isRequired
 }
 
 export default connect(mapStateToProps)(RepositoriesContainer)
