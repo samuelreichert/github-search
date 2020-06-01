@@ -21,8 +21,8 @@ const PaginationContainer = ({ totalCount, setLoading, updateRepositories }) => 
 
   const handlePageChange = async (selectedPage) => {
     if (page !== selectedPage) {
-      history.push(`/?q=${searchString}&page=${selectedPage}`)
       setLoading(true)
+      history.push(`/?q=${searchString}&page=${selectedPage}`)
 
       const startTime = (new Date()).getTime()
       const { items, total_count: totalCount } = await searchRepositories({ search: searchString, page: selectedPage })

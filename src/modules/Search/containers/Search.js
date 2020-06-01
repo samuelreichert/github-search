@@ -17,12 +17,12 @@ const mapDispatchToProps = {
 
 const SearchContainer = ({ setLoading, updateRepositories }) => {
   const [searchText, setSearchText] = useState('')
-  const debouncedSearchText = useDebounce(searchText, 500)
+  const debouncedSearchText = useDebounce(searchText, 600)
   const { formatMessage } = useIntl()
-  const query = useQuery()
   const history = useHistory()
-  const page = query.get('page')
+  const query = useQuery()
   const searchString = query.get('q')
+  const page = query.get('page')
 
   const searchRepositoriesAsync = async (searchText, page = 1) => {
     const startTime = (new Date()).getTime()
@@ -33,19 +33,23 @@ const SearchContainer = ({ setLoading, updateRepositories }) => {
   }
 
   useEffect(() => {
-    if (searchString && page && searchString !== searchText) {
-      setLoading(true)
-      searchRepositoriesAsync(searchString, page)
-    }
-
     if (debouncedSearchText) {
-      history.push(`/?q=${debouncedSearchText}&page=1`)
       setLoading(true)
-      searchRepositoriesAsync(debouncedSearchText)
+      return history.push(`/?q=${debouncedSearchText}&page=1`)
+    } else {
+      setLoading(true)
+      return history.push('/')
+    }
+  }, [debouncedSearchText])
+
+  useEffect(() => {
+    if (searchString) {
+      const selectedPage = page || 1
+      searchRepositoriesAsync(searchString, selectedPage)
     } else {
       updateRepositories()
     }
-  }, [debouncedSearchText])
+  }, [searchString])
 
   return <Search onChange={e => setSearchText(e.target.value)} formatMessage={formatMessage} />
 }
