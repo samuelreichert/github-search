@@ -1,0 +1,8 @@
+.hover-badge {
+  border-radius: 10rem;
+  padding: 0.25em 1em;
+}
+
+.hover-badge:hover {
+  background-color: #ecf0f1;
+}

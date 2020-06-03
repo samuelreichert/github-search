@@ -7,5 +7,13 @@ export default {
   loading: 'Loading...',
   updatedAt: 'Updated at {date}',
   footerText: 'Would you like to search your private repositories inside this beautiful site? You can! just',
-  githubLogin: 'login with GitHub'
+  githubLogin: 'login with GitHub',
+  home: 'Home',
+  license: 'License:',
+  repoOwnerImage: 'Repository owner image',
+  readme: 'Readme',
+  stars: 'stars',
+  issues: 'issues',
+  watchers: 'watchers',
+  forks: 'forks'
 }

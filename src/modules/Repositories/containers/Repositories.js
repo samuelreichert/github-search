@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { useIntl } from 'react-intl'
-// import useQuery from '../../../common/useQuery'
+// import useQuery from '../../../hooks/useQuery'
 // import { postUserCode } from '../../../api'
 
 import Repositories from '../components'

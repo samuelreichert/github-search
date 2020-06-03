@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import useQuery from '../../../common/useQuery'
+import useQuery from '../../../hooks/useQuery'
 
 import { setLoading, updateRepositories } from '../redux/actions'
 import { searchRepositories } from '../../../api'

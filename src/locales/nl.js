@@ -7,5 +7,13 @@ export default {
   loading: 'Het laden...',
   updatedAt: 'Bijgewerkt op {date}',
   footerText: 'Wilt u uw privé-opslagplaatsen doorzoeken op deze prachtige site? Jij kan! Je hoeft alleen in te',
-  githubLogin: 'loggen met GitHub'
+  githubLogin: 'loggen met GitHub',
+  home: 'Start',
+  license: 'Licentie:',
+  repoOwnerImage: 'Afbeelding van eigenaar van opslagplaats',
+  readme: 'Leesmij',
+  stars: 'sterren',
+  issues: 'problemen',
+  watchers: 'kijkers',
+  forks: 'vorken'
 }
