@@ -5,7 +5,7 @@ import { IntlProvider } from 'react-intl'
 import locales from './locales'
 import store from './store'
 
-import App from './screens/Root'
+import App from './App'
 import * as serviceWorker from './serviceWorker'
 
 const languages = ['en', 'pt', 'nl']
