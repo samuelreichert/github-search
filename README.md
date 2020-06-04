@@ -42,17 +42,21 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ## Tech stack
 The project has the following tech stack:
 
-* React
-* Redux
 * Axios
-* React-Intl
-* Emotion and Rebass
+* React, Redux, Redux-Thunk
+* React-Router-Dom, React-Intl
+* React-Js-Pagination, React-Markdown
+* Bootstrap, FontAwesome
 
 ## Decisions
-
-**UI and UX**
-I decided to use emotion so this way the components are completely modular, and rebass helps me with primitive UI components so I dont need to create everything from the ground.
 
 **Requests**
 I decided to use Axios to handle the requests asynchronously, and decided to centralize all the information about the APIs requests inside the /api path, this way I abstracted how the API works, and only call them in the components.
 
+**Languages**
+I used react-intl to manage multiple languages (english, portuguese and dutch) and used `navigator.language` to get browser's set language and use as the app language. The default language is english, if no translation is provided.
+
+**UI and UX**
+I decided to use bootstrap so this way I could quickly implement all the components with a consistent UI, and bootstrap gives me all needed UI components so I dont need to create everything from the ground.
+
+**Tests**
