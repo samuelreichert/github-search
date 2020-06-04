@@ -17,10 +17,7 @@ const RepositoryDetails = ({
     homepage,
     html_url: homeUrl,
     language,
-    license: {
-      name: licenseName,
-      url: licenseUrl
-    } = {},
+    license,
     open_issues: openIssues,
     owner: {
       avatar_url: avatarUrl,
@@ -41,7 +38,7 @@ const RepositoryDetails = ({
     </Link>
 
     <h1 className='h3'>
-      {isPrivate && <span className='mr-3'><i className='fas fa-user-lock' /></span>}
+      {isPrivate && <span className='mr-3'><i className='fas fa-user-lock fa-xs' /></span>}
       {fullName}
       <a href={homeUrl} target='_blank' rel='noopener noreferrer' className='ml-3'>
         <i className='fas fa-external-link-alt fa-xs' />
@@ -90,13 +87,14 @@ const RepositoryDetails = ({
           <p className='mb-1'>{description}</p>
           <a href={homepage} className='mb-1 d-block'>{homepage}</a>
 
-          <p>
-            {formatMessage({ id: 'license' })}
-            <a href={licenseUrl} className='ml-2'>
-              <i className='fas fa-balance-scale mr-1' />
-              {licenseName}
-            </a>
-          </p>
+          {license &&
+            <p>
+              {formatMessage({ id: 'license' })}
+              <a href={license.url} className='ml-2'>
+                <i className='fas fa-balance-scale mr-1' />
+                {license.name}
+              </a>
+            </p>}
 
           <h5>
             {languages.map((lang) => (
@@ -123,10 +121,7 @@ RepositoryDetails.propTypes = {
     forks: PropTypes.number,
     full_name: PropTypes.string,
     language: PropTypes.string,
-    license: PropTypes.shape({
-      name: PropTypes.string,
-      url: PropTypes.string
-    }),
+    license: PropTypes.object,
     open_issues: PropTypes.number,
     owner: PropTypes.shape({
       avatar_url: PropTypes.string,

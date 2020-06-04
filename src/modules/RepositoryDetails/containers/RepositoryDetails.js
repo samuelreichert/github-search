@@ -37,10 +37,14 @@ const RepositoryDetailsContainer = ({ items }) => {
 
   useEffect(() => {
     const getLanguagesAsync = async (url) => {
+      let langsArray = []
       const langs = await getLanguagesFromUrl(url)
-      const langsArray = Object.keys(langs).sort((a, b) => {
-        return langs[b] - langs[a]
-      })
+
+      if (langs) {
+        langsArray = Object.keys(langs).sort((a, b) => {
+          return langs[b] - langs[a]
+        })
+      }
 
       setLanguages(langsArray)
     }
@@ -60,7 +64,6 @@ const RepositoryDetailsContainer = ({ items }) => {
       getReadmeAsync(fullName)
     }
   }, [repository])
-  console.log(languages)
 
   return (
     <RepositoryDetails
