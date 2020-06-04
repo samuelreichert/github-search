@@ -15,5 +15,6 @@ export default {
   stars: 'stars',
   issues: 'issues',
   watchers: 'watchers',
-  forks: 'forks'
+  forks: 'forks',
+  repositoriesNotFoundText: 'We could not find any repository with the search term.'
 }

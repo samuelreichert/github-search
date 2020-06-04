@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { useIntl } from 'react-intl'
@@ -7,16 +7,19 @@ import useDebounce from '../../../hooks/useDebounce'
 import useQuery from '../../../hooks/useQuery'
 
 import { setLoading, updateRepositories } from '../../Repositories/redux/actions'
+import { setSearchText } from '../redux/actions'
 import { searchRepositories } from '../../../api'
 import Search from '../components'
 
+const mapStateToProps = ({ search: { searchText } }) => ({ searchText })
+
 const mapDispatchToProps = {
   setLoading,
-  updateRepositories
+  updateRepositories,
+  setSearchText
 }
 
-const SearchContainer = ({ setLoading, updateRepositories }) => {
-  const [searchText, setSearchText] = useState('')
+const SearchContainer = ({ setLoading, updateRepositories, setSearchText, searchText }) => {
   const debouncedSearchText = useDebounce(searchText, 600)
   const { formatMessage } = useIntl()
   const history = useHistory()
@@ -56,7 +59,9 @@ const SearchContainer = ({ setLoading, updateRepositories }) => {
 
 SearchContainer.propTypes = {
   setLoading: PropTypes.func.isRequired,
-  updateRepositories: PropTypes.func.isRequired
+  updateRepositories: PropTypes.func.isRequired,
+  setSearchText: PropTypes.func.isRequired,
+  searchText: PropTypes.string.isRequired
 }
 
-export default connect(null, mapDispatchToProps)(SearchContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer)

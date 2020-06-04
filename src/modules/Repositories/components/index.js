@@ -6,20 +6,20 @@ import Pagination from '../containers/Pagination'
 
 const Repositories = ({ items, totalCount, formatMessage, responseTime }) => (
   <div className='py-5 container'>
-    {items.length === 0 &&
-      <div className='card'>
+    {!items.length &&
+      <div className='card shadow'>
         <div className='card-body text-center'>
           <p className='lead mt-3'>{formatMessage({ id: 'initialScreenPhrase' })}</p>
           <p className='mt-0'>{formatMessage({ id: 'secondaryPhrase' })}</p>
         </div>
       </div>}
 
-    {items.length > 0 &&
+    {!!items.length &&
       <div className='d-flex justify-content-end pr-1'>
         <p className='text-info'>{formatMessage({ id: 'searchTime' }, { time: responseTime })}</p>
       </div>}
 
-    {items.length > 0 &&
+    {!!items.length &&
       <div className='list-group shadow'>
         {items.map((item, i) => <RepositoryItem item={item} key={i} formatMessage={formatMessage} />)}
       </div>}

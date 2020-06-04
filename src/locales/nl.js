@@ -15,5 +15,6 @@ export default {
   stars: 'sterren',
   issues: 'problemen',
   watchers: 'kijkers',
-  forks: 'vorken'
+  forks: 'vorken',
+  repositoriesNotFoundText: 'We konden geen opslagplaats vinden met de zoekterm.'
 }

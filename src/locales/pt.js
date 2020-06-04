@@ -15,5 +15,6 @@ export default {
   stars: 'estrelas',
   issues: 'discussões',
   watchers: 'observadores',
-  forks: 'ramificações'
+  forks: 'ramificações',
+  repositoriesNotFoundText: 'Não foi possível encontrar nenhum repositório com o termo pesquisado.'
 }
