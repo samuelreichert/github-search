@@ -2,10 +2,11 @@ const initialState = {
   items: [],
   totalCount: 0,
   loading: false,
-  responseTime: 0
+  responseTime: 0,
+  error: null
 }
 
-const reducer = (state = initialState, { type, items, totalCount, loading, responseTime }) => {
+const reducer = (state = initialState, { type, items, totalCount, loading, responseTime, error }) => {
   switch (type) {
     case 'UPDATE_REPOSITORIES':
       return {
@@ -18,6 +19,11 @@ const reducer = (state = initialState, { type, items, totalCount, loading, respo
       return {
         ...state,
         loading
+      }
+    case 'SET_ERROR':
+      return {
+        ...state,
+        error
       }
     default:
       return state

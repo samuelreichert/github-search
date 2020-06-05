@@ -18,5 +18,7 @@ export default {
   issues: 'discussões',
   watchers: 'observadores',
   forks: 'ramificações',
-  repositoriesNotFoundText: 'Não foi possível encontrar nenhum repositório com o termo pesquisado.'
+  repositoriesNotFoundText: 'Não foi possível encontrar nenhum repositório com o termo pesquisado.',
+  repositoriesError: 'Infelizmente, ocorreu um erro ao tentar buscar os repositórios no GitHub. Você pode tentar novamente em breve!',
+  repositoryError: 'Infelizmente, ocorreu um erro ao tentar buscar este repositório no GitHub. Você pode tentar novamente em breve!'
 }

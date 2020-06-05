@@ -18,5 +18,7 @@ export default {
   issues: 'issues',
   watchers: 'watchers',
   forks: 'forks',
-  repositoriesNotFoundText: 'We could not find any repository with the search term.'
+  repositoriesNotFoundText: 'We could not find any repository with the search term.',
+  repositoriesError: 'Unfortunately, there was an error trying to fetch the repositories from GitHub. You can try again soon!',
+  repositoryError: 'Unfortunately, there was an error trying to fetch this repository from GitHub. You can try again soon!'
 }

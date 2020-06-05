@@ -18,5 +18,7 @@ export default {
   issues: 'problemen',
   watchers: 'kijkers',
   forks: 'vorken',
-  repositoriesNotFoundText: 'We konden geen opslagplaats vinden met de zoekterm.'
+  repositoriesNotFoundText: 'We konden geen opslagplaats vinden met de zoekterm.',
+  repositoriesError: 'Helaas is er een fout opgetreden bij het ophalen van de opslagplaatsen van GitHub. Je kunt het binnenkort opnieuw proberen!',
+  repositoryError: 'Helaas is er een fout opgetreden bij het ophalen van deze repository van GitHub. Je kunt het binnenkort opnieuw proberen!'
 }

@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl'
 import useQuery from '../../../hooks/useQuery'
 import { getLanguagesFromUrl, getReadme, getRepository } from '../../../api'
 import RepositoryDetails from '../components'
+import ErrorCard from '../../ErrorCard'
 
 const mapStateToProps = ({ repositories: { items } }) => ({ items })
 
@@ -12,6 +13,7 @@ const RepositoryDetailsContainer = ({ items }) => {
   const [repository, setRepository] = useState()
   const [readme, setReadme] = useState('')
   const [languages, setLanguages] = useState([])
+  const [error, setError] = useState(null)
   const query = useQuery()
   const repoName = query.get('name')
   const { formatMessage } = useIntl()
@@ -24,6 +26,11 @@ const RepositoryDetailsContainer = ({ items }) => {
         setRepository(selectedRepository)
       } else {
         const repo = await getRepository(name)
+
+        if (repo.error) {
+          return setError(repo.error)
+        }
+
         setRepository(repo)
       }
     }
@@ -64,6 +71,10 @@ const RepositoryDetailsContainer = ({ items }) => {
       getReadmeAsync(fullName)
     }
   }, [repository])
+
+  if (error) {
+    return <ErrorCard message={formatMessage({ id: 'repositoryError' })} />
+  }
 
   return (
     <RepositoryDetails

@@ -21,7 +21,8 @@ export const searchRepositories = async ({ search, page = 1, perPage = 10 } = {}
     const { data } = await axios.get(BASE_URL, options)
     return data
   } catch (error) {
-    console.error('Error trying to search repositories from GitHub', error)
+    console.error(error)
+    return { error }
   }
 }
 
@@ -33,10 +34,10 @@ export const getRepository = async (name) => {
     if (userToken) options.headers = headers
 
     const { data: { items } } = await axios.get(BASE_URL, options)
-
     return items[0]
   } catch (error) {
-    console.error('Error trying to search a specific repository from GitHub', error)
+    console.error(error)
+    return { error }
   }
 }
 
@@ -48,7 +49,7 @@ export const getReadme = async (name) => {
 
     return decodedReadme
   } catch (error) {
-    console.error('Error trying to find a readme from GitHub', error)
+    console.error('Error trying to get the Readme from a GitHub repository', error)
   }
 }
 
@@ -57,6 +58,6 @@ export const getLanguagesFromUrl = async (url) => {
     const options = userToken ? { headers } : {}
     return (await axios.get(url, options)).data
   } catch (error) {
-    console.error('Error trying to get languages from a repository from GitHub', error)
+    console.error('Error trying to get the languages from a GitHub repository', error)
   }
 }

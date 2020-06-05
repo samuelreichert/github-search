@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom'
 import useDebounce from '../../../hooks/useDebounce'
 import useQuery from '../../../hooks/useQuery'
 
-import { setLoading, updateRepositories } from '../../Repositories/redux/actions'
+import { setLoading, updateRepositories, setError } from '../../Repositories/redux/actions'
 import { setSearchText } from '../redux/actions'
 import { searchRepositories } from '../../../api'
 import Search from '../components'
@@ -16,10 +16,11 @@ const mapStateToProps = ({ search: { searchText } }) => ({ searchText })
 const mapDispatchToProps = {
   setLoading,
   updateRepositories,
-  setSearchText
+  setSearchText,
+  setError
 }
 
-const SearchContainer = ({ setLoading, updateRepositories, setSearchText, searchText }) => {
+const SearchContainer = ({ setLoading, updateRepositories, setSearchText, searchText, setError }) => {
   const debouncedSearchText = useDebounce(searchText, 600)
   const { formatMessage } = useIntl()
   const history = useHistory()
@@ -29,8 +30,13 @@ const SearchContainer = ({ setLoading, updateRepositories, setSearchText, search
 
   const searchRepositoriesAsync = async (searchText, page = 1) => {
     const startTime = (new Date()).getTime()
-    const { items, total_count: totalCount } = await searchRepositories({ search: searchText, page })
+    const { items, total_count: totalCount, error } = await searchRepositories({ search: searchText, page })
     const endTime = (new Date()).getTime()
+
+    if (error) {
+      setLoading(false)
+      return setError(error)
+    }
 
     updateRepositories({ items, totalCount, responseTime: (endTime - startTime) })
   }
@@ -61,7 +67,8 @@ SearchContainer.propTypes = {
   setLoading: PropTypes.func.isRequired,
   updateRepositories: PropTypes.func.isRequired,
   setSearchText: PropTypes.func.isRequired,
-  searchText: PropTypes.string.isRequired
+  searchText: PropTypes.string.isRequired,
+  setError: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer)

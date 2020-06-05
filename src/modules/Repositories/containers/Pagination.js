@@ -4,16 +4,17 @@ import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import useQuery from '../../../hooks/useQuery'
 
-import { setLoading, updateRepositories } from '../redux/actions'
+import { setLoading, updateRepositories, setError } from '../redux/actions'
 import { searchRepositories } from '../../../api'
 import Pagination from '../components/Pagination'
 
 const mapDispatchToProps = {
   setLoading,
-  updateRepositories
+  updateRepositories,
+  setError
 }
 
-const PaginationContainer = ({ totalCount, setLoading, updateRepositories }) => {
+const PaginationContainer = ({ totalCount, setLoading, updateRepositories, setError }) => {
   const history = useHistory()
   const query = useQuery()
   const page = query.get('page')
@@ -25,8 +26,14 @@ const PaginationContainer = ({ totalCount, setLoading, updateRepositories }) => 
       history.push(`/?q=${searchString}&page=${selectedPage}`)
 
       const startTime = (new Date()).getTime()
-      const { items, total_count: totalCount } = await searchRepositories({ search: searchString, page: selectedPage })
+      const { items, total_count: totalCount, error } = await searchRepositories({ search: searchString, page: selectedPage })
       const endTime = (new Date()).getTime()
+
+      if (error) {
+        setLoading(false)
+        return setError(error)
+      }
+
       updateRepositories({ items, totalCount, responseTime: (endTime - startTime) })
     }
   }
@@ -37,7 +44,8 @@ const PaginationContainer = ({ totalCount, setLoading, updateRepositories }) => 
 PaginationContainer.propTypes = {
   setLoading: PropTypes.func.isRequired,
   totalCount: PropTypes.number.isRequired,
-  updateRepositories: PropTypes.func.isRequired
+  updateRepositories: PropTypes.func.isRequired,
+  setError: PropTypes.func.isRequired
 }
 
 export default connect(null, mapDispatchToProps)(PaginationContainer)
