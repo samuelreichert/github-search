@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Search = ({ onChange, formatMessage }) => (
-  <div className='bg-info'>
+  <div className='bg-secondary py-4'>
     <div className='container d-flex flex-column justify-content-center align-items-center py-5'>
       <h1 className='text-white'>{formatMessage({ id: 'searchTitle' })}</h1>
       <input
