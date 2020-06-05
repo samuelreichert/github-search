@@ -36,11 +36,11 @@ const RepositoryItem = ({ item, formatMessage }) => {
       <p className='mb-1'>{description}</p>
 
       <small>
-        <span className='mr-3 d-inline-block'><i className='far fa-star' /> {buildReadableCount(starsCount)}</span>
-        {language && <span className='mr-3 d-inline-block'><i className='fas fa-code' /> {language}</span>}
-        <span className='mr-3 d-inline-block'><i className='fas fa-exclamation-circle' /> {buildReadableCount(openIssues)}</span>
-        <span className='mr-3 d-inline-block'><i className='far fa-eye' /> {buildReadableCount(watchers)}</span>
-        <span className='mr-3 d-inline-block'><i className='fas fa-code-branch' /> {buildReadableCount(forks)}</span>
+        <span className='mr-3 d-inline-block'><i className='far fa-star mr-1' /> {buildReadableCount(starsCount)}</span>
+        {language && <span className='mr-3 d-inline-block'><i className='fas fa-code mr-1' /> {language}</span>}
+        <span className='mr-3 d-inline-block'><i className='fas fa-exclamation-circle mr-1' /> {buildReadableCount(openIssues)}</span>
+        <span className='mr-3 d-inline-block'><i className='far fa-eye mr-1' /> {buildReadableCount(watchers)}</span>
+        <span className='mr-3 d-inline-block'><i className='fas fa-code-branch mr-1' /> {buildReadableCount(forks)}</span>
       </small>
     </Link>
   )

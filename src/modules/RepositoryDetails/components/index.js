@@ -48,24 +48,24 @@ const RepositoryDetails = ({
     <div className='bg-white py-4 px-3 mt-3'>
       <div className='d-flex justify-content-between'>
         <span className='hover-badge d-inline-block'>
-          <i className='far fa-star' /> {buildReadableCount(starsCount)} {formatMessage({ id: 'stars' })}
+          <i className='far fa-star mr-1' /> {buildReadableCount(starsCount)} {formatMessage({ id: 'stars' })}
         </span>
 
         {language &&
           <span className='hover-badge d-inline-block'>
-            <i className='fas fa-code' /> {language}
+            <i className='fas fa-code mr-1' /> {language}
           </span>}
 
         <span className='hover-badge d-inline-block'>
-          <i className='fas fa-exclamation-circle' /> {buildReadableCount(openIssues)} {formatMessage({ id: 'issues' })}
+          <i className='fas fa-exclamation-circle mr-1' /> {buildReadableCount(openIssues)} {formatMessage({ id: 'issues' })}
         </span>
 
         <span className='hover-badge d-inline-block'>
-          <i className='far fa-eye' /> {buildReadableCount(watchers)} {formatMessage({ id: 'watchers' })}
+          <i className='far fa-eye mr-1' /> {buildReadableCount(watchers)} {formatMessage({ id: 'watchers' })}
         </span>
 
         <span className='hover-badge d-inline-block'>
-          <i className='fas fa-code-branch' /> {buildReadableCount(forks)} {formatMessage({ id: 'forks' })}
+          <i className='fas fa-code-branch mr-1' /> {buildReadableCount(forks)} {formatMessage({ id: 'forks' })}
         </span>
       </div>
 
@@ -104,13 +104,14 @@ const RepositoryDetails = ({
         </div>
       </div>
 
-      <div>
-        <h3 className='ml-3'>{formatMessage({ id: 'readme' })}</h3>
+      {readme &&
+        <div>
+          <h3 className='ml-3'>{formatMessage({ id: 'readme' })}</h3>
 
-        <div className='jumbotron ml-3'>
-          <ReactMarkdown source={readme} escapeHtml={false} />
-        </div>
-      </div>
+          <div className='jumbotron ml-3'>
+            <ReactMarkdown source={readme} escapeHtml={false} />
+          </div>
+        </div>}
     </div>
   </div>
 )
