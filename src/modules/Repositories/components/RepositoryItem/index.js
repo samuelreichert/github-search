@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 import { Link } from 'react-router-dom'
 import buildReadableCount from '../../../../common/buildReadableCount'
 
@@ -9,7 +10,8 @@ const buildReadableDate = (date) => {
   return localDate.toLocaleString(navigator.language)
 }
 
-const RepositoryItem = ({ item, formatMessage }) => {
+const RepositoryItem = ({ item }) => {
+  const { formatMessage } = useIntl()
   const {
     description,
     forks,
@@ -47,8 +49,7 @@ const RepositoryItem = ({ item, formatMessage }) => {
 }
 
 RepositoryItem.propTypes = {
-  item: PropTypes.object.isRequired,
-  formatMessage: PropTypes.func.isRequired
+  item: PropTypes.object.isRequired
 }
 
 export default RepositoryItem

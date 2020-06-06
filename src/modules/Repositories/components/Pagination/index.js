@@ -10,15 +10,7 @@ const Pagination = ({ handlePageChange, totalCount, activePage }) => (
       activePage={parseInt(activePage)}
       pageRangeDisplayed={5}
       itemClass='page-item'
-      itemClassFirst='page-item'
-      itemClassPrev='page-item'
-      itemClassNext='page-item'
-      itemClassLast='page-item'
       linkClass='page-link'
-      linkClassFirst='page-link'
-      linkClassPrev='page-link'
-      linkClassNext='page-link'
-      linkClassLast='page-link'
     />
   </div>
 )

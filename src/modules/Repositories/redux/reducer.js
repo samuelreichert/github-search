@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
   items: [],
   totalCount: 0,
   loading: false,
@@ -10,6 +10,7 @@ const reducer = (state = initialState, { type, items, totalCount, loading, respo
   switch (type) {
     case 'UPDATE_REPOSITORIES':
       return {
+        ...state,
         items,
         totalCount,
         loading,

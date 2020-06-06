@@ -8,13 +8,15 @@ import { setLoading, updateRepositories, setError } from '../redux/actions'
 import { searchRepositories } from '../../../api'
 import Pagination from '../components/Pagination'
 
+const mapStateToProps = ({ repositories: { totalCount } }) => ({ totalCount })
+
 const mapDispatchToProps = {
   setLoading,
   updateRepositories,
   setError
 }
 
-const PaginationContainer = ({ totalCount, setLoading, updateRepositories, setError }) => {
+export const PaginationContainer = ({ totalCount, setLoading, updateRepositories, setError }) => {
   const history = useHistory()
   const query = useQuery()
   const page = query.get('page')
@@ -38,7 +40,7 @@ const PaginationContainer = ({ totalCount, setLoading, updateRepositories, setEr
     }
   }
 
-  return <Pagination handlePageChange={handlePageChange} totalCount={totalCount} activePage={page} />
+  return <Pagination handlePageChange={handlePageChange} totalCount={totalCount} activePage={page || '1'} />
 }
 
 PaginationContainer.propTypes = {
@@ -48,4 +50,4 @@ PaginationContainer.propTypes = {
   setError: PropTypes.func.isRequired
 }
 
-export default connect(null, mapDispatchToProps)(PaginationContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(PaginationContainer)

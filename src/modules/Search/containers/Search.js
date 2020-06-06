@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { useIntl } from 'react-intl'
 import { useHistory } from 'react-router-dom'
 import useDebounce from '../../../hooks/useDebounce'
 import useQuery from '../../../hooks/useQuery'
@@ -20,9 +19,8 @@ const mapDispatchToProps = {
   setError
 }
 
-const SearchContainer = ({ setLoading, updateRepositories, setSearchText, searchText, setError }) => {
+export const SearchContainer = ({ setLoading, updateRepositories, setSearchText, searchText, setError }) => {
   const debouncedSearchText = useDebounce(searchText, 600)
-  const { formatMessage } = useIntl()
   const history = useHistory()
   const query = useQuery()
   const searchString = query.get('q')
@@ -60,7 +58,7 @@ const SearchContainer = ({ setLoading, updateRepositories, setSearchText, search
     }
   }, [searchString])
 
-  return <Search onChange={e => setSearchText(e.target.value)} formatMessage={formatMessage} />
+  return <Search onChange={e => setSearchText(e.target.value)} />
 }
 
 SearchContainer.propTypes = {

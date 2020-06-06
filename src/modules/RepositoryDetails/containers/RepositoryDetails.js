@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { useIntl } from 'react-intl'
 import useQuery from '../../../hooks/useQuery'
 import { getLanguagesFromUrl, getReadme, getRepository } from '../../../api'
 import RepositoryDetails from '../components'
@@ -9,14 +8,13 @@ import ErrorCard from '../../ErrorCard'
 
 const mapStateToProps = ({ repositories: { items } }) => ({ items })
 
-const RepositoryDetailsContainer = ({ items }) => {
+export const RepositoryDetailsContainer = ({ items }) => {
   const [repository, setRepository] = useState()
   const [readme, setReadme] = useState('')
   const [languages, setLanguages] = useState([])
   const [error, setError] = useState(null)
   const query = useQuery()
   const repoName = query.get('name')
-  const { formatMessage } = useIntl()
 
   useEffect(() => {
     let selectedRepository
@@ -24,7 +22,9 @@ const RepositoryDetailsContainer = ({ items }) => {
     const getRepositoryAsync = async (name, selectedRepository) => {
       if (typeof selectedRepository === 'object') {
         setRepository(selectedRepository)
-      } else {
+      }
+
+      if (name) {
         const repo = await getRepository(name)
 
         if (repo.error) {
@@ -73,7 +73,7 @@ const RepositoryDetailsContainer = ({ items }) => {
   }, [repository])
 
   if (error) {
-    return <ErrorCard message={formatMessage({ id: 'repositoryError' })} />
+    return <ErrorCard messageId='repositoryError' />
   }
 
   return (
@@ -81,7 +81,6 @@ const RepositoryDetailsContainer = ({ items }) => {
       repository={repository}
       readme={readme}
       languages={languages}
-      formatMessage={formatMessage}
     />
   )
 }

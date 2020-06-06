@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { useIntl } from 'react-intl'
 
 import Repositories from '../components'
 import Loading from '../components/Loading'
@@ -21,27 +20,12 @@ const mapStateToProps = (
   error
 })
 
-const RepositoriesContainer = ({ items, loading, totalCount, responseTime, searchText, error }) => {
-  const { formatMessage } = useIntl()
+export const RepositoriesContainer = ({ items, loading, totalCount, responseTime, searchText, error }) => {
+  if (error) return <ErrorCard messageId='repositoriesError' />
+  if (loading) return <Loading />
+  if (searchText && responseTime && !loading && !totalCount) return <RepositoriesNotFound />
 
-  if (error) {
-    return <ErrorCard message={formatMessage({ id: 'repositoriesError' })} />
-  }
-
-  if (loading) return <Loading formatMessage={formatMessage} />
-
-  if (searchText && responseTime && !loading && !totalCount) {
-    return <RepositoriesNotFound formatMessage={formatMessage} />
-  }
-
-  return (
-    <Repositories
-      items={items}
-      totalCount={totalCount}
-      formatMessage={formatMessage}
-      responseTime={responseTime}
-    />
-  )
+  return <Repositories items={items} totalCount={totalCount} responseTime={responseTime} />
 }
 
 RepositoriesContainer.propTypes = {
