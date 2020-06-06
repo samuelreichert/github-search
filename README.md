@@ -16,6 +16,11 @@ Then install the dependencies using Yarn.
 yarn install
 ```
 
+You need to create a `.env.local` file, all you need to do is:
+```
+cp .env.local.example .env.local
+```
+
 ### `yarn start`
 
 Runs the app in the development mode.<br />
@@ -47,6 +52,7 @@ The project has the following tech stack:
 * React-Router-Dom, React-Intl
 * React-Js-Pagination, React-Markdown
 * Bootstrap, FontAwesome
+* Jest, Enzyme
 
 ## Decisions
 
@@ -58,5 +64,3 @@ I used react-intl to manage multiple languages (english, portuguese and dutch) a
 
 **UI and UX**
 I decided to use bootstrap so this way I could quickly implement all the components with a consistent UI, and bootstrap gives me all needed UI components so I dont need to create everything from the ground.
-
-**Tests**
