@@ -44,6 +44,13 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+## Cypress
+
+To start cypress, run `yarn run cypress open`. (To be able to run the tests successfully you must to have your app running, with: `yarn start`)<br />
+Now you will see a screen where you can find the integration tests.<br />
+You can run each of them specifically by clicking on them.<br />
+Or you can run all the integration tests by clicking on 'Run all specs' button on top-right of the screen.
+
 ## Tech stack
 The project has the following tech stack:
 
@@ -52,7 +59,8 @@ The project has the following tech stack:
 * React-Router-Dom, React-Intl
 * React-Js-Pagination, React-Markdown
 * Bootstrap, FontAwesome
-* Jest, Enzyme
+* Jest, Enzyme for unit tests
+* Cypress for end-to-end tests
 
 ## Decisions
 

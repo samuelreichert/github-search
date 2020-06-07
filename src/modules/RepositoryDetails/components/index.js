@@ -40,7 +40,7 @@ const RepositoryDetails = ({
         <i className='fas fa-arrow-left mr-2' /> {formatMessage({ id: 'home' })}
       </Link>
 
-      <h1 className='h3'>
+      <h1 className='h3 full-name'>
         {isPrivate && <span className='mr-3'><i className='fas fa-user-lock fa-xs' /></span>}
         {fullName}
         <a href={homeUrl} target='_blank' rel='noopener noreferrer' className='ml-3'>
@@ -99,7 +99,7 @@ const RepositoryDetails = ({
                 </a>
               </p>}
 
-            <h5>
+            <h5 className='languages'>
               {languages.map((lang) => (
                 <span className='badge badge-info mr-2' key={lang}>{lang}</span>
               ))}
