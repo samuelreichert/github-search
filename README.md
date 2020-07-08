@@ -1,5 +1,10 @@
-# GitHub Search
-Created by Samuel Reichert
+<div align="center">
+  <h1>GitHub Search</h1>
+</div>
+
+<div align="center">
+  Search GitHub repositories app with a responsive layout, built with React, Redux and Bootstrap
+</div>
 
 ## Setup
 This project was made using Node.js 12.16.
